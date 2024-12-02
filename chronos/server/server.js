@@ -2,25 +2,25 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const db = require('./models');
-const { Sequelize } = require('sequelize');
+const {Sequelize} = require('sequelize');
 var cors = require('cors');
 require('dotenv').config();
 app.use(cors());
 app.use(express.json());
 
 const sequelize = new Sequelize('ingrid', process.env.DATABASE_USER, process.env.DATABASE_PASSWORD, {
-  host: '127.0.0.1',
-  dialect: 'mysql',
+    host: '127.0.0.1',
+    dialect: 'mysql',
 });
 
 sequelize
-  .authenticate()
-  .then(() => {
-    console.log('Connection has been established successfully.');
-  })
-  .catch((error) => {
-    console.error('Unable to connect to the database: ', error);
-  });
+    .authenticate()
+    .then(() => {
+        console.log('Connection has been established successfully.');
+    })
+    .catch((error) => {
+        console.error('Unable to connect to the database: ', error);
+    });
 
 app.listen(5000, () => {
     console.log("listening on port 5000")
@@ -85,39 +85,39 @@ const getEleveAbsenceRouter = require('./routes/getEleveAbsence')
 app.use("/eleve_absence", getEleveAbsenceRouter)
 
 // Redirection/route pour backend addJustificationWithFile (ajout de justification à une absence)
-const addJustificationWithFileRouter = require('./routes/setJustificationWithFile') 
+const addJustificationWithFileRouter = require('./routes/setJustificationWithFile')
 app.use("/add_justification_file", addJustificationWithFileRouter)
 
 // Redirection/route pour backend setJustificationWithoutFile (ajout de justification à une absence)
-const addJustificationRouter = require('./routes/setJustificationWithoutFile') 
+const addJustificationRouter = require('./routes/setJustificationWithoutFile')
 app.use("/add_justification", addJustificationRouter)
 
 // Redirection/route pour backend getFormationsSecretary (récupère les formations et élèves sous la charge de la secrétaire)
-const getFormationsSecretaryRouter = require('./routes/getFormationsSecretary') 
+const getFormationsSecretaryRouter = require('./routes/getFormationsSecretary')
 app.use("/secretary_formation", getFormationsSecretaryRouter)
 
 // Redirection/route pour backend setValidAbsence (valider l'absence d'un élève)
-const setValidAbsenceRouter = require('./routes/setValidAbsence') 
+const setValidAbsenceRouter = require('./routes/setValidAbsence')
 app.use("/set_valid_absence", setValidAbsenceRouter)
 
 // Redirection/route pour backend getProfessorsSecretary (récupère les professeurs liés à la secrétaire)
-const getProfessorsSecretaryRouter = require('./routes/getProfessorsSecretary') 
+const getProfessorsSecretaryRouter = require('./routes/getProfessorsSecretary')
 app.use("/secretary_professor", getProfessorsSecretaryRouter)
 
 // Redirection/route pour backend getProfessorPresences (récupère le nombre d'heures de présences aux cours d'un professeur)
-const getProfessorPresencesRouter = require('./routes/getProfessorPresences') 
+const getProfessorPresencesRouter = require('./routes/getProfessorPresences')
 app.use("/professor_presences", getProfessorPresencesRouter)
 
-const apiRouter = require('./routes/api') 
+const apiRouter = require('./routes/api')
 app.use("/api", apiRouter)
 
 const getMessageRouter = require('./routes/Message')
 app.use("/messages", getMessageRouter)
 
-app.use(express.json({ limit: "25mb" }));
-app.use(express.urlencoded({ limit: "25mb" }));
+app.use(express.json({limit: "25mb"}));
+app.use(express.urlencoded({limit: "25mb"}));
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  next();
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    next();
 });

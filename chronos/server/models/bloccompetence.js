@@ -1,24 +1,25 @@
 'use strict';
 const {
-  Model
+    Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class BlocCompetence extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
+    class BlocCompetence extends Model {
+        /**
+         * Helper method for defining associations.
+         * This method is not a part of Sequelize lifecycle.
+         * The `models/index` file will call this method automatically.
+         */
+        static associate(models) {
+            // define association here
+        }
     }
-  }
-  BlocCompetence.init({
-    libelle: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'BlocCompetence',
-    tableName: 'BLOC_COMPETENCE'
-  });
-  return BlocCompetence;
+
+    BlocCompetence.init({
+        libelle: DataTypes.STRING
+    }, {
+        sequelize,
+        modelName: 'BlocCompetence',
+        tableName: 'BLOC_COMPETENCE'
+    });
+    return BlocCompetence;
 };

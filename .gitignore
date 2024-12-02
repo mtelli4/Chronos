@@ -1,1 +1,4 @@
 .idea
+chronos/node_modules
+chronos/client/node_modules
+chronos/server/node_modules
